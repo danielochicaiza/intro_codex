@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-geist: 'Arial', 'Helvetica Neue', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #fff9f0;
+}
+
+body {
+  margin: 0;
+  color: #18243f;
+  background:
+    radial-gradient(circle at 7% 14%, rgba(255, 210, 190, 0.38), transparent 25rem),
+    radial-gradient(circle at 94% 7%, rgba(216, 235, 255, 0.6), transparent 27rem),
+    #fff9f0;
+  font-family: var(--font-geist);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: #ffd6c9;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-8px) rotate(-2deg); }
+}
+
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(0.94) translateY(8px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pop-in {
+  animation: pop-in 240ms ease-out both;
+}
+
+.doodle-line {
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
