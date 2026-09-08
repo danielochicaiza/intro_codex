@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 
-type Verdict = 'junk' | 'no';
+type Verdict = 'junk' | 'no' | 'international';
 
 type FoodResult = {
   name: string;
@@ -25,13 +25,30 @@ const healthyKeywords = [
   'broccoli', 'sandwich', 'nuts', 'almonds', 'fruit', 'vegetable', 'soup', 'toast',
 ];
 
-const examples = ['🍕 Pizza', '🍎 Apple', '🍩 Donut', '🥗 Salad'];
+const internationalKeywords = [
+  'sushi', 'taco', 'tacos', 'curry', 'paella', 'falafel', 'bibimbap', 'pho', 'dim sum',
+  'pierogi', 'empanada', 'empanadas', 'biryani', 'pad thai', 'ramen',
+];
+
+const examples = ['🍕 Pizza', '🍎 Apple', '🍩 Donut', '🥗 Salad', '🌍 Sushi', '🌍 Curry'];
 
 function classifyFood(rawFood: string): FoodResult {
   const name = rawFood.trim().replace(/\s+/g, ' ');
   const lower = name.toLowerCase();
+  const isInternational = internationalKeywords.some((keyword) => lower.includes(keyword));
   const isJunk = junkKeywords.some((keyword) => lower.includes(keyword));
   const isHealthy = healthyKeywords.some((keyword) => lower.includes(keyword));
+
+  if (isInternational) {
+    return {
+      name,
+      verdict: 'international',
+      headline: 'Not sure, what about asking a local?',
+      description: 'Internation food changes a lot and has many versions.',
+      emoji: '🌍',
+      reason: 'The preparation might make it more or less beneficial for your health. Be careful.',
+    };
+  }
 
   if (isJunk && !isHealthy) {
     return {
@@ -153,9 +170,9 @@ export default function Home() {
               <div><p className="text-xs font-black uppercase tracking-[0.18em] text-slate-400">Today’s check</p><p className="mt-1 font-bold text-ink">{result ? result.name : 'A tiny food verdict'}</p></div>
               <div className="animate-float text-4xl">{result?.emoji ?? '🥑'}</div>
             </div>
-            <div className={`mt-6 rounded-[25px] p-6 ${result?.verdict === 'junk' ? 'bg-[#fff0e8]' : result?.verdict === 'no' ? 'bg-[#eaf9f0]' : 'bg-[#eef0ff]'}`}>
-              <div className="mb-4 flex items-center justify-between"><span className="rounded-full bg-white/80 px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-slate-500">{result ? 'Your result' : 'How it works'}</span><span className="text-2xl">{result ? (result.verdict === 'junk' ? '😅' : '🎉') : '💡'}</span></div>
-              {result ? <><h2 className="text-3xl font-black leading-tight tracking-[-0.04em]">{result.headline}</h2><p className="mt-3 leading-7 text-slate-600">{result.description}</p><div className="mt-5 flex gap-3 rounded-2xl bg-white/70 p-4 text-sm leading-6 text-slate-600"><span className="text-xl">{result.verdict === 'junk' ? '🔎' : '🌱'}</span><span>{result.reason}</span></div></> : <><h2 className="text-3xl font-black leading-tight tracking-[-0.04em]">Curious about that snack?</h2><p className="mt-3 leading-7 text-slate-600">Pop a food into the checker and we’ll help you make sense of it in seconds.</p><div className="mt-5 flex items-center gap-3 rounded-2xl bg-white/70 p-4 text-sm font-bold leading-6 text-slate-600"><span className="text-xl">👇</span> Start with something you ate today!</div></>}
+            <div className={`mt-6 rounded-[25px] p-6 ${result?.verdict === 'junk' ? 'bg-[#fff0e8]' : result?.verdict === 'international' ? 'bg-[#dbeafe]' : result?.verdict === 'no' ? 'bg-[#eaf9f0]' : 'bg-[#eef0ff]'}`}>
+              <div className="mb-4 flex items-center justify-between"><span className="rounded-full bg-white/80 px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-slate-500">{result ? 'Your result' : 'How it works'}</span><span className="text-2xl">{result ? (result.verdict === 'junk' ? '😅' : result.verdict === 'international' ? '✈️' : '🎉') : '💡'}</span></div>
+              {result ? <><h2 className="text-3xl font-black leading-tight tracking-[-0.04em]">{result.headline}</h2><p className="mt-3 leading-7 text-slate-600">{result.description}</p><div className="mt-5 flex gap-3 rounded-2xl bg-white/70 p-4 text-sm leading-6 text-slate-600"><span className="text-xl">{result.verdict === 'junk' ? '🔎' : result.verdict === 'international' ? '🌍' : '🌱'}</span><span>{result.reason}</span></div></> : <><h2 className="text-3xl font-black leading-tight tracking-[-0.04em]">Curious about that snack?</h2><p className="mt-3 leading-7 text-slate-600">Pop a food into the checker and we’ll help you make sense of it in seconds.</p><div className="mt-5 flex items-center gap-3 rounded-2xl bg-white/70 p-4 text-sm font-bold leading-6 text-slate-600"><span className="text-xl">👇</span> Start with something you ate today!</div></>}
             </div>
             <div className="mt-6 flex items-start gap-3 px-1 text-sm leading-6 text-slate-500"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-black text-white"><CheckIcon /></span><span>Food is more than a label. Aim for variety, balance, and what makes you feel good.</span></div>
           </div>
