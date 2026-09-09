@@ -11,16 +11,17 @@
 }
 
 html {
-  background: #fff9f0;
+  background: #d1d5db;
 }
 
 body {
   margin: 0;
   color: #18243f;
   background:
-    radial-gradient(circle at 7% 14%, rgba(255, 210, 190, 0.38), transparent 25rem),
-    radial-gradient(circle at 94% 7%, rgba(216, 235, 255, 0.6), transparent 27rem),
-    #fff9f0;
+    radial-gradient(circle at 8% 12%, rgba(255, 255, 255, 0.72), transparent 28rem),
+    radial-gradient(circle at 92% 8%, rgba(107, 114, 128, 0.28), transparent 30rem),
+    linear-gradient(135deg, #f3f4f6 0%, #d1d5db 52%, #9ca3af 100%);
+  background-attachment: fixed;
   font-family: var(--font-geist);
 }
 

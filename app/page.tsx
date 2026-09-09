@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { FormEvent, useState } from 'react';
 
 type Verdict = 'junk' | 'no' | 'international';
@@ -123,8 +124,20 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen overflow-hidden">
-      <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-7 lg:px-10">
+    <main className="relative isolate min-h-screen overflow-hidden">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+        <Image
+          src="/orange-background.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="scale-[1.02] object-cover object-[65%_center] opacity-75 blur-[2px]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-100/95 via-gray-200/65 to-gray-400/10" />
+      </div>
+
+      <nav className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-7 lg:px-10">
         <button className="flex items-center gap-3 text-left" onClick={() => { setFood(''); setResult(null); }} aria-label="Reset Junk or No">
           <span className="flex h-10 w-10 rotate-[-7deg] items-center justify-center rounded-[14px] bg-ink text-xl shadow-[4px_4px_0_#ff765c]">🍎</span>
           <span className="text-lg font-black tracking-[-0.04em]">Junk or No?</span>
@@ -132,7 +145,7 @@ export default function Home() {
         <span className="hidden rounded-full bg-white/75 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-slate-500 shadow-sm sm:inline-flex">Food, decoded</span>
       </nav>
 
-      <section className="mx-auto grid w-full max-w-6xl items-center gap-12 px-6 pb-14 pt-8 lg:grid-cols-[1.02fr_0.98fr] lg:px-10 lg:pb-24 lg:pt-16">
+      <section className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 px-6 pb-14 pt-8 lg:grid-cols-[1.02fr_0.98fr] lg:px-10 lg:pb-24 lg:pt-16">
         <div className="relative z-10">
           <div className="mb-6 inline-flex -rotate-2 items-center gap-2 rounded-full border border-[#f3c8b4] bg-[#fff0e8] px-4 py-2 text-sm font-bold text-[#c55b46] shadow-[3px_3px_0_#f3c8b4]">
             <span>👋</span> No food shaming here
@@ -180,7 +193,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-[#f0e5d9] bg-white/45 px-6 py-12 lg:px-10">
+      <section className="relative z-10 border-t border-[#f0e5d9] bg-white/45 px-6 py-12 lg:px-10">
         <div className="mx-auto flex max-w-6xl flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
           <div><p className="text-xs font-black uppercase tracking-[0.2em] text-coral">A kinder way to think about food</p><h2 className="mt-2 text-2xl font-black tracking-[-0.04em] sm:text-3xl">Simple answers. Zero judgment.</h2></div>
           <div className="grid gap-5 text-sm text-slate-600 sm:grid-cols-3 sm:gap-8"><div className="flex gap-3"><span className="text-2xl">⚡</span><span><strong className="block text-ink">Quick</strong>Instant food checks</span></div><div className="flex gap-3"><span className="text-2xl">💛</span><span><strong className="block text-ink">Kind</strong>No good or bad food</span></div><div className="flex gap-3"><span className="text-2xl">🧠</span><span><strong className="block text-ink">Helpful</strong>Built for learning</span></div></div>
