@@ -4,6 +4,7 @@
 
 :root {
   --font-geist: 'Arial', 'Helvetica Neue', sans-serif;
+  --font-display: 'Avenir Next', 'Trebuchet MS', 'Segoe UI', sans-serif;
 }
 
 * {
@@ -61,4 +62,13 @@ button {
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
+}
+
+.display-heading {
+  font-family: var(--font-display);
+  font-size: clamp(3.75rem, 7vw, 6rem);
+  font-weight: 900;
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
 }

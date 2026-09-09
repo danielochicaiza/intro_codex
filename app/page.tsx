@@ -150,7 +150,7 @@ export default function Home() {
           <div className="mb-6 inline-flex -rotate-2 items-center gap-2 rounded-full border border-[#f3c8b4] bg-[#fff0e8] px-4 py-2 text-sm font-bold text-[#c55b46] shadow-[3px_3px_0_#f3c8b4]">
             <span>👋</span> No food shaming here
           </div>
-          <h1 className="max-w-xl text-5xl font-black leading-[0.98] tracking-[-0.065em] sm:text-7xl">
+          <h1 className="display-heading max-w-2xl">
             Is it junk<br /><span className="relative inline-block text-coral">or no? <span className="absolute -bottom-2 left-1 h-2 w-full rounded-full bg-[#ffd0c3]" /></span>
           </h1>
           <p className="mt-7 max-w-md text-lg leading-8 text-slate-600 sm:text-xl">Type a food below and get a quick, friendly answer. No guilt trips, promise.</p>
